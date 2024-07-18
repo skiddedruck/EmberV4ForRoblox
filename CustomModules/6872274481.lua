@@ -9118,57 +9118,18 @@ task.spawn(function()
 end)
 
 run(function()
-    local enchantexploit = {};
-    local enchantexploit = {}
-	local enchantnum = 0
-	local et = 0
-    local effects = {
-    "fortune_1", "fortune_2", "fortune_3"
-	   }
-	local function addEnchants()
-	end
-    enchantexploit = GuiLibrary.ObjectsThatCanBeSaved.BlatantWindow.Api.CreateOptionsButton({
-        Name = 'Dupe',
-        HoverText = '',
-        Function = function(calling)
-            if calling then 
-				pcall(function()
-					if shared.GuiLibrary.ObjectsThatCanBeSaved["Lobby CheckToggle"].Enabled then else
-						shared.GuiLibrary.ObjectsThatCanBeSaved["Lobby CheckToggle"].Api.ToggleButton()
-				   end
-				end)
-				warningNotification("Dupe", "It is suggested to use this module before the match starts!", 5)
-				et = 0
-				RunLoops:BindToStepped("enchant",function()
-					et = et + 1
-					if et == 45 then
-						for i,v in effects do 
-							bedwars.Client:Get("RequestFortuneDoubleDown").instance:FireServer({statusEffectType = v})
-						end
-						et = 0
-					end
-				end)
-			else
-				RunLoops:UnbindFromStepped("enchant")
+    local breathe = {Enabled = false}
+    breathe = GuiLibrary.ObjectsThatCanBeSaved.RuckWindow.Api.CreateOptionsButton({
+        Name = "DragonBreathe",
+        Function = function(callback)
+            if callback then 
+                task.spawn(function()
+                    repeat 
+                        task.wait(0.3) 
+                        game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):WaitForChild("DragonBreath"):FireServer({player = game:GetService("Players").LocalPlayer})
+                    until (not breathe.Enabled)
+                end)
             end
-			task.spawn(function()
-				repeat 
-					local args = {
-						[1] = {
-							["statusEffectType"] = "fortune_1",
-							["fortuneStacks"] = 9999999999999999
-						}
-					}
-					game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):WaitForChild("RequestFortuneCashOut"):FireServer(unpack(args))
-					task.wait(0.1)
-					local args = {
-						[1] = {
-							["player"] = game:GetService("Players").LocalPlayer
-						}
-					}
-					
-					game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):WaitForChild("FortuneEnchantRequestDoubleDownAmount"):InvokeServer(unpack(args))						
-				until not enchantexploit.Enabled
-			end)
         end
+    })
 end)
