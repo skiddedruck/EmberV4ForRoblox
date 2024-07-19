@@ -30,7 +30,7 @@ local function displayErrorPopup(text, func)
 end
 
 local function vapeGithubRequest(scripturl)
-	if not isfile("ember/"..scripturl) then
+	if not isfile("vape/"..scripturl) then
 		local suc, res
 		task.delay(15, function()
 			if not res and not errorPopupShown then 
@@ -38,19 +38,19 @@ local function vapeGithubRequest(scripturl)
 				displayErrorPopup("The connection to github is taking a while, Please be patient.")
 			end
 		end)
-		suc, res = pcall(function() return game:HttpGet("https://raw.githubusercontent.com/skiddedruck/EmberV4ForRoblox/"..readfile("ember/commithash.txt").."/"..scripturl, true) end)
+		suc, res = pcall(function() return game:HttpGet("https://raw.githubusercontent.com/skiddedruck/EmberV4ForRoblox/"..readfile("vape/commithash.txt").."/"..scripturl, true) end)
 		if not suc or res == "404: Not Found" then
 			if identifyexecutor and ({identifyexecutor()})[1] == 'Wave' then 
 				displayErrorPopup('Stop using detected garbage, Vape will not work on such garabge until they fix BOTH HttpGet & file functions.')
 				error(res)
 			end
-			displayErrorPopup("Failed to connect to github : ember/"..scripturl.." : "..res)
+			displayErrorPopup("Failed to connect to github : vape/"..scripturl.." : "..res)
 			error(res)
 		end
 		if scripturl:find(".lua") then res = "--This watermark is used to delete the file if its cached, remove it to make the file persist after commits.\n"..res end
-		writefile("ember/"..scripturl, res)
+		writefile("vape/"..scripturl, res)
 	end
-	return readfile("ember/"..scripturl)
+	return readfile("vape/"..scripturl)
 end
 
 if not shared.VapeDeveloper then 
@@ -64,31 +64,31 @@ if not shared.VapeDeveloper then
 	end
 	if commit then
 		if isfolder("vape") then 
-			if ((not isfile("ember/commithash.txt")) or (readfile("ember/commithash.txt") ~= commit or commit == "main")) then
-				for i,v in pairs({"ember/Universal.lua", "ember/MainScript.lua", "ember/GuiLibrary.lua"}) do 
+			if ((not isfile("vape/commithash.txt")) or (readfile("vape/commithash.txt") ~= commit or commit == "main")) then
+				for i,v in pairs({"vape/Universal.lua", "vape/MainScript.lua", "vape/GuiLibrary.lua"}) do 
 					if isfile(v) and readfile(v):find("--This watermark is used to delete the file if its cached, remove it to make the file persist after commits.") then
 						delfile(v)
 					end 
 				end
-				if isfolder("ember/CustomModules") then 
-					for i,v in pairs(listfiles("ember/CustomModules")) do 
+				if isfolder("vape/CustomModules") then 
+					for i,v in pairs(listfiles("vape/CustomModules")) do 
 						if isfile(v) and readfile(v):find("--This watermark is used to delete the file if its cached, remove it to make the file persist after commits.") then
 							delfile(v)
 						end 
 					end
 				end
-				if isfolder("ember/Libraries") then 
-					for i,v in pairs(listfiles("ember/Libraries")) do 
+				if isfolder("vape/Libraries") then 
+					for i,v in pairs(listfiles("vape/Libraries")) do 
 						if isfile(v) and readfile(v):find("--This watermark is used to delete the file if its cached, remove it to make the file persist after commits.") then
 							delfile(v)
 						end 
 					end
 				end
-				writefile("ember/commithash.txt", commit)
+				writefile("vape/commithash.txt", commit)
 			end
 		else
 			makefolder("vape")
-			writefile("ember/commithash.txt", commit)
+			writefile("vape/commithash.txt", commit)
 		end
 	else
 		displayErrorPopup("Failed to connect to github, please try using a VPN.")
