@@ -30,7 +30,7 @@ local isnetworkowner = function(part)
 	end
 	return networkownerswitch <= tick()
 end
-local vapeAssetTable = {["vape/assets/VapeCape.png"] = "rbxassetid://13380453812", ["vape/assets/ArrowIndicator.png"] = "rbxassetid://13350766521"}
+local vapeAssetTable = {["ember/assets/VapeCape.png"] = "rbxassetid://13380453812", ["ember/assets/ArrowIndicator.png"] = "rbxassetid://13350766521"}
 local getcustomasset = getsynasset or getcustomasset or function(location) return vapeAssetTable[location] or "" end
 local queueonteleport = syn and syn.queue_on_teleport or queue_on_teleport or function() end
 local synapsev3 = syn and syn.toast_notification and "V3" or ""
@@ -50,14 +50,14 @@ local worldtoviewportpoint = function(pos)
 end
 
 local function vapeGithubRequest(scripturl)
-	if not isfile("vape/"..scripturl) then
-		local suc, res = pcall(function() return game:HttpGet("https://raw.githubusercontent.com/skiddedruck/EmberV4ForRoblox/"..readfile("vape/commithash.txt").."/"..scripturl, true) end)
+	if not isfile("ember/"..scripturl) then
+		local suc, res = pcall(function() return game:HttpGet("https://raw.githubusercontent.com/skiddedruck/EmberV4ForRoblox/"..readfile("ember/commithash.txt").."/"..scripturl, true) end)
 		assert(suc, res)
 		assert(res ~= "404: Not Found", res)
 		if scripturl:find(".lua") then res = "--This watermark is used to delete the file if its cached, remove it to make the file persist after commits.\n"..res end
-		writefile("vape/"..scripturl, res)
+		writefile("ember/"..scripturl, res)
 	end
-	return readfile("vape/"..scripturl)
+	return readfile("ember/"..scripturl)
 end
 
 local function downloadVapeAsset(path)
@@ -76,7 +76,7 @@ local function downloadVapeAsset(path)
 			repeat task.wait() until isfile(path)
 			textlabel:Destroy()
 		end)
-		local suc, req = pcall(function() return vapeGithubRequest(path:gsub("vape/assets", "assets")) end)
+		local suc, req = pcall(function() return vapeGithubRequest(path:gsub("ember/assets", "assets")) end)
         if suc and req then
 		    writefile(path, req)
         else
@@ -499,7 +499,7 @@ run(function()
 		whitelist.loaded = true
 		if not first or whitelist.textdata ~= whitelist.olddata then
 			if not first then
-				whitelist.olddata = isfile('vape/profiles/whitelist.json') and readfile('vape/profiles/whitelist.json') or nil
+				whitelist.olddata = isfile('ember/profiles/whitelist.json') and readfile('ember/profiles/whitelist.json') or nil
 			end
 			whitelist.data = game:GetService('HttpService'):JSONDecode(whitelist.textdata)
 			whitelist.localprio = whitelist:get(lplr)
@@ -531,7 +531,7 @@ run(function()
 					end
 				end
 				whitelist.olddata = whitelist.textdata
-				pcall(function() writefile('vape/profiles/whitelist.json', whitelist.textdata) end)
+				pcall(function() writefile('ember/profiles/whitelist.json', whitelist.textdata) end)
 			end
 
 			if whitelist.data.KillVape then
@@ -762,7 +762,7 @@ run(function()
 	radargameCamera.FieldOfView = 45
 	local Radar = GuiLibrary.CreateCustomWindow({
 		Name = "Radar",
-		Icon = "vape/assets/RadarIcon1.png",
+		Icon = "ember/assets/RadarIcon1.png",
 		IconSize = 16
 	})
 	local RadarColor = Radar.CreateColorSlider({
@@ -815,7 +815,7 @@ run(function()
 	end))
 	GuiLibrary.ObjectsThatCanBeSaved.GUIWindow.Api.CreateCustomToggle({
 		Name = "Radar",
-		Icon = "vape/assets/RadarIcon2.png",
+		Icon = "ember/assets/RadarIcon2.png",
 		Function = function(callback)
 			Radar.SetVisible(callback)
 			if callback then
@@ -2780,7 +2780,7 @@ run(function()
         arrowObject.AnchorPoint = Vector2.new(0.5, 0.5)
         arrowObject.Position = UDim2.new(0.5, 0, 0.5, 0)
         arrowObject.Visible = false
-        arrowObject.Image = downloadVapeAsset("vape/assets/ArrowIndicator.png")
+        arrowObject.Image = downloadVapeAsset("ember/assets/ArrowIndicator.png")
 		arrowObject.ImageColor3 = getPlayerColor(plr.Player) or Color3.fromHSV(ArrowsColor.Hue, ArrowsColor.Sat, ArrowsColor.Value)
         arrowObject.Name = plr.Player.Name
         arrowObject.Parent = ArrowsFolder
@@ -4812,14 +4812,14 @@ run(function()
 				table.insert(Cape.Connections, lplr.CharacterAdded:Connect(function(char)
 					task.spawn(function()
 						pcall(function()
-							capeFunction(char, (successfulcustom or downloadVapeAsset("vape/assets/VapeCape.png")))
+							capeFunction(char, (successfulcustom or downloadVapeAsset("ember/assets/VapeCape.png")))
 						end)
 					end)
 				end))
 				if lplr.Character then
 					task.spawn(function()
 						pcall(function()
-							capeFunction(lplr.Character, (successfulcustom or downloadVapeAsset("vape/assets/VapeCape.png")))
+							capeFunction(lplr.Character, (successfulcustom or downloadVapeAsset("ember/assets/VapeCape.png")))
 						end)
 					end)
 				end
@@ -5634,12 +5634,12 @@ run(function()
 				chair.Material = Enum.Material.SmoothPlastic
 				chair.Parent = workspace
 				movingsound = Instance.new("Sound")
-				movingsound.SoundId = downloadVapeAsset("vape/assets/ChairRolling.mp3")
+				movingsound.SoundId = downloadVapeAsset("ember/assets/ChairRolling.mp3")
 				movingsound.Volume = 0.4
 				movingsound.Looped = true
 				movingsound.Parent = workspace
 				flyingsound = Instance.new("Sound")
-				flyingsound.SoundId = downloadVapeAsset("vape/assets/ChairFlying.mp3")
+				flyingsound.SoundId = downloadVapeAsset("ember/assets/ChairFlying.mp3")
 				flyingsound.Volume = 0.4
 				flyingsound.Looped = true
 				flyingsound.Parent = workspace

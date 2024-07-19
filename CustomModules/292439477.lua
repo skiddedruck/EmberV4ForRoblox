@@ -79,11 +79,11 @@ local betterisfile = function(file)
 end
 local function GetURL(scripturl)
 	if shared.VapeDeveloper then
-		assert(betterisfile("vape/"..scripturl), "File not found : vape/"..scripturl)
-		return readfile("vape/"..scripturl)
+		assert(betterisfile("ember/"..scripturl), "File not found : ember/"..scripturl)
+		return readfile("ember/"..scripturl)
 	else
 		local res = game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/"..scripturl, true)
-		assert(res ~= "404: Not Found", "File not found : vape/"..scripturl)
+		assert(res ~= "404: Not Found", "File not found : ember/"..scripturl)
 		return res
 	end
 end
@@ -219,7 +219,7 @@ local function getcustomassetfunc(path)
 			textlabel:Remove()
 		end)
 		local req = requestfunc({
-			Url = "https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/"..path:gsub("vape/assets", "assets"),
+			Url = "https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/"..path:gsub("ember/assets", "assets"),
 			Method = "GET"
 		})
 		writefile(path, req.Body)
@@ -1916,7 +1916,7 @@ runcode(function()
 	local origtpstring = tpstring
 	local Overlay = GuiLibrary.CreateCustomWindow({
 		["Name"] = "Overlay", 
-		["Icon"] = "vape/assets/TargetIcon1.png",
+		["Icon"] = "ember/assets/TargetIcon1.png",
 		["IconSize"] = 16
 	})
 	local overlayframe = Instance.new("Frame")
@@ -1961,7 +1961,7 @@ runcode(function()
 	Overlay["Bypass"] = true
 	GuiLibrary["ObjectsThatCanBeSaved"]["GUIWindow"]["Api"].CreateCustomToggle({
 		["Name"] = "Overlay", 
-		["Icon"] = "vape/assets/TargetIcon1.png", 
+		["Icon"] = "ember/assets/TargetIcon1.png", 
 		["Function"] = function(callback)
 			Overlay.SetVisible(callback) 
 			if callback then
