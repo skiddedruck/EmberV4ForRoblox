@@ -316,7 +316,7 @@ run(function()
 	local olduninject
 	function whitelist:get(plr)
 		local plrstr = self:hash(plr.Name..plr.UserId)
-		print(plrstr)
+		print(plrstr ", this is ur players hash")
 		for i,v in self.data.WhitelistedUsers do
 			if v.hash == plrstr then
 				return v.level, v.attackable or whitelist.localprio >= v.level, v.tags
