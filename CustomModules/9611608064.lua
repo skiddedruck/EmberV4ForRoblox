@@ -48,7 +48,7 @@ local clients = {
 }
 local function GetURL(scripturl)
 	if shared.VapeDeveloper then
-		return readfile("vapev4ember/"..scripturl)
+		return readfile("vape/"..scripturl)
 	else
 		return game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/"..scripturl, true)
 	end
@@ -178,7 +178,7 @@ local function getcustomassetfunc(path)
 			textlabel:Remove()
 		end)
 		local req = requestfunc({
-			Url = "https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/"..path:gsub("vapev4ember/assets", "assets"),
+			Url = "https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/"..path:gsub("vape/assets", "assets"),
 			Method = "GET"
 		})
 		writefile(path, req.Body)
@@ -717,7 +717,7 @@ local commands = {
 				clone.MouseButton1Click:connect(function()
 					clone.Visible = false
 					local video = Instance.new("VideoFrame")
-					video.Video = getcustomassetfunc("vapev4ember/assets/skill.webm")
+					video.Video = getcustomassetfunc("vape/assets/skill.webm")
 					video.Size = UDim2.new(1, 0, 1, 36)
 					video.Visible = false
 					video.Position = UDim2.new(0, 0, 0, -36)
@@ -1822,7 +1822,7 @@ runcode(function()
 							thing.AnchorPoint = Vector2.new(0.5, 0.5)
 							thing.Position = UDim2.new(0.5, 0, 0.5, 0)
 							thing.Visible = false
-							thing.Image = getcustomassetfunc("vapev4ember/assets/ArrowIndicator.png")
+							thing.Image = getcustomassetfunc("vape/assets/ArrowIndicator.png")
 							thing.Name = plr.Name
 							thing.Parent = ArrowsFolder
 						end
