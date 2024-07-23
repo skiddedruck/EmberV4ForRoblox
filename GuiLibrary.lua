@@ -65,7 +65,7 @@ local vapeAssetTable = {
 	["vape/assets/VapeIcon.png"] = "rbxassetid://13350808582",
 	["vape/assets/RenderIcon.png"] = "rbxassetid://13350832775",
 	["vape/assets/VapeLogo1.png"] = "rbxassetid://13350860863",
-	["vape/assets/VapeLogo3.png"] = "rbxassetid://13350872035",
+	["vape/assets/VapeLogo3.png"] = "rbxassetid://18622927501",
 	["vape/assets/VapeLogo2.png"] = "rbxassetid://18613891245",
 	["vape/assets/VapeLogo4.png"] = "rbxassetid://18613915740"
 }
