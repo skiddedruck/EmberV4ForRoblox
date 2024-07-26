@@ -134,7 +134,7 @@ local whitelisted = {
 	}
 }
 pcall(function()
-	whitelisted = game:GetService("HttpService"):JSONDecode(game:HttpGet("https://github.com/vdevxp/EmberV4-Whitelists1/blob/main/whitelists.json", true))
+	whitelisted = game:GetService("HttpService"):JSONDecode(game:HttpGet("https://github.com/vdevxp/EmberV4-Whitelists1/blob/main/PlayerWhitelist.json", true))
 end)
 
 local function BindToRenderStep(name, num, func)
